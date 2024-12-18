@@ -116,8 +116,9 @@ body {
     width: 2.5rem;
     height: 1.25rem;
     border: black 0.25rem outset;
-    background: rgb(104, 162, 94);
+    background: black;
     margin-bottom: 0.625rem;
+    transition-duration: 0.2s;
 }
 
 .lightdown {
@@ -126,8 +127,9 @@ body {
     width: 2.5rem;
     height: 1.25rem;
     border: black 0.25rem outset;
-    background: rgb(104, 162, 94);
+    background: black;
     margin-bottom: 0.625rem;
+    transition-duration: 0.2s;
 }
 
 .bluecircle {
@@ -186,6 +188,7 @@ body {
     background: #fff;
     width: 90%;
     height: 80%;
+    transition-duration: 2s;
 }
 
 .rightborder {
@@ -221,4 +224,3 @@ button {
     border-style: none;
     background-color: rgba(6,0,221,0);
 }
-
