@@ -50,7 +50,42 @@ body {
     height: 90%;
     border: black 0.0625rem solid;
     border-radius: 0.9375rem;
+
+    .nameandimage {
+        position: relative;
+
+        bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h1 {
+            text-transform: capitalize;
+            color : white;
+            margin: 0;
+        }
+        img {
+            width : 200px
+        }
+    }
+
+    .infos{
+        width: 50%;
+    .type {
+        border: 1px solid black;
+        width: 50px;
+        text-align: center;
+        text-transform: capitalize;
+        background:linear-gradient(to bottom, #8B0000, #FF6347, #8B0000); ;
+    }
+
+    audio{
+        width: 80%;
+        }
+    }
 }
+
+
 
 .separator {
     display: flex;
@@ -180,6 +215,9 @@ body {
 }
 
 .screen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: relative;
     border: black 0.0625rem solid;
     border-radius: 0.625rem;
@@ -187,6 +225,15 @@ body {
     width: 90%;
     height: 80%;
     margin-bottom: 20px;
+
+    .listcontainer {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        height: 100%;
+    }
+
+
 }
 
 .buttonscontainer {
@@ -244,7 +291,7 @@ body {
     border-bottom-right-radius: 10rem;
 }
 
-button {
+.plus {
     position: relative;
     bottom: 3.125rem;
     left: 0.9375rem;
