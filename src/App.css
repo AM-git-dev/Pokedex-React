@@ -169,6 +169,7 @@ body {
 
 .screenborder {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border: black 0.0625rem solid;
@@ -180,12 +181,44 @@ body {
 
 .screen {
     position: relative;
-    bottom: 1.5625rem;
     border: black 0.0625rem solid;
     border-radius: 0.625rem;
     background: #fff;
     width: 90%;
     height: 80%;
+    margin-bottom: 20px;
+}
+
+.buttonscontainer {
+    display: flex;
+    width: 220px;
+    height: 42px;
+    background: rgb(43, 43, 43);
+    border-radius: 15px;
+
+}
+
+.start{
+    position: relative;
+    top: 9.5px;
+    width: 85px;
+    height: 15px;
+    background-color: #d1d1d1;
+    margin-left:25px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: black 4px outset;
+}
+
+.select{
+    position: relative;
+    top: 9.5px;
+    width: 85px;
+    height: 15px;
+    background-color: #d1d1d1;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: black 4px outset;
 }
 
 .rightborder {
