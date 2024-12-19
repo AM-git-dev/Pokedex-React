@@ -198,7 +198,12 @@ body {
     #017cac 100%);
     border: black 0.0625rem solid;
     border-radius: 50%;
-    box-shadow: black 0.25rem 0.25rem 0.25rem 0;
+    animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+    50% {transform: rotate(360deg);}
+
 }
 
 .reflect {
