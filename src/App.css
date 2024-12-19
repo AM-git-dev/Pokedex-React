@@ -293,6 +293,10 @@ body {
     border: black 4px outset;
 }
 
+.start:active, .select:active {
+    transform: translateY(2px);
+}
+
 .select{
     position: relative;
     top: 9.5px;
@@ -338,3 +342,60 @@ body {
     background-color: rgba(6,0,221,0);
 }
 
+/* pokemon class */
+
+.classnormal {
+    background-color: rgb(160, 162, 160);
+}
+.classfire {
+    background-color: rgb(231, 35, 36);
+}
+.classwater {
+    background-color: rgb(36, 129, 240);
+}
+.classelectric {
+    background-color: rgb(250, 193, 0);
+}
+.classgrass {
+    background-color: rgb(61, 162, 36);
+}
+.classice {
+    background-color: rgb(61, 217, 255);
+}
+.classfighting {
+    background-color: rgb(255, 129, 0);
+}
+.classpoison {
+    background-color: rgb(146, 63, 204);
+}
+.classground {
+    background-color: rgb(146, 80, 27);
+}
+.classflying {
+    background-color: rgb(130, 186, 240);
+}
+.classpsychic {
+    background-color: rgb(239, 63, 122);
+}
+.classbug {
+    background-color: rgb(146, 162, 18);
+}
+.classrock {
+    background-color: rgb(176, 171, 130);
+}
+.classghost {
+    background-color: rgb(113, 63, 113);
+}
+.classdragon {
+    background-color: rgb(79, 96, 226);
+}
+.classdark {
+    background-color: rgb(79, 63, 61);
+}
+.classsteel {
+    background: rgb(96, 162, 185);
+}
+.classfairy {
+    background-color: rgb(239, 113, 240);
+}
+.classstellar {}

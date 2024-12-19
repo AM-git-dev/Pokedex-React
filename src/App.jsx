@@ -11,10 +11,17 @@ function App() {
 
     const [screenColor, setcreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
 
-    const HandleClick = (event) => {
+    const HandleClickStart = (event) => {
 
         setcreenColor('white')
         setLight('rgb(38,255,0)')
+    }
+
+    const HandleClickdown = (event) => {
+
+        setcreenColor('black')
+        setLight('rgb(104, 162, 94)')
+
     }
 
     const [pokemonData, setPokemonData] = useState(null);
@@ -93,8 +100,8 @@ function App() {
 
                         </div>
                         <div className="buttonscontainer">
-                            <div onClick={HandleClick} className="start"></div>
-                            <div className="select"></div>
+                            <div onClick={HandleClickStart} className="start"></div>
+                            <div onClick={HandleClickdown} className="select"></div>
                         </div>
                     </div>
                 </div>
