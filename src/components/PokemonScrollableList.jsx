@@ -131,6 +131,7 @@ function PokemonScrollableList({ onSelect }) {
 
     return (
         <div
+            className="hoverElement"
             ref={listRef}
             style={{
                 border: 'double 6px black',
@@ -141,7 +142,7 @@ function PokemonScrollableList({ onSelect }) {
                 overflowY: 'scroll',
                 padding: '5px',
                 cursor: isDragging ? 'grabbing' : 'grab',
-                userSelect: 'none'
+                userSelect: 'none',
             }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -150,9 +151,11 @@ function PokemonScrollableList({ onSelect }) {
         >
             {pokemonList.map(p => (
                 <div
+                    className="listItemHover"
                     key={p.id}
                     style={{ cursor: 'pointer', marginBottom: '5px' }}
                     onClick={() => handleClick(p)}
+
                 >
                     {String(p.id).padStart(3, '0')} - {p.nameFr}
                 </div>

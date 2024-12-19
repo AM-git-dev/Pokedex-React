@@ -183,7 +183,22 @@ body {
     background: rgb(104, 162, 94);
     margin-bottom: 0.625rem;
     transition-duration: 0.2s;
+
+    animation-name: colorChange;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+
 }
+
+@keyframes colorChange {
+    10% {
+        background: rgb(104, 162, 94);
+    }
+    90% {
+        background-color: rgb(38,255,0);
+    }
+}
+
 
 .bluecircle {
     position: relative;
@@ -446,4 +461,11 @@ body {
     text-align: center;
     text-transform: capitalize;
 
+}
+
+/* hover */
+
+.listItemHover:hover {
+    background-color: black;
+    color: white;
 }
