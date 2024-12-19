@@ -7,14 +7,14 @@ import PokemonScrollableList from './components/PokemonScrollableList';
 
 function App() {
 
-    const [light, setLight] = useState('black')
+    const [light, setLight] = useState('rgb(104, 162, 94)')
 
-    const [screenColor, setcreenColor] = useState('black')
+    const [screenColor, setcreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
 
     const HandleClick = (event) => {
 
         setcreenColor('white')
-        setLight('rgb(104, 162, 94)')
+        setLight('rgb(38,255,0)')
     }
 
     const [pokemonData, setPokemonData] = useState(null);
@@ -57,7 +57,7 @@ function App() {
         <div className="pokedexcontainer">
             <div className="upscreencontainer">
                 <div className="upscreenborder">
-                    <div className="upscreen">
+                    <div style={{ background: screenColor }} className="upscreen">
                         {error && <div className="error-message">{error}</div>}
                         {pokemonData && <PokemonDisplay pokemonData={pokemonData} />}
                     </div>
@@ -81,19 +81,19 @@ function App() {
 
                 <div className="bottomscreencontainer">
                     <div className="screenborder">
-                        <div className="screen" style={{ backgroundColor: screenColor}}>
-                            <div className="listcontainer">
+                        <div className="screen" style={{ background: screenColor }}>
+                            <div className={`listcontainer ${screenColor === "white" ? "visible" : ""}`}>
                                 <PokemonScrollableList onSelect={handleSelectFromList} />
                             </div>
 
-                            <div className="filters">
+                            <div className={`filters ${screenColor === "white" ? "visible" : ""}`}>
                                 <PokemonFetcher onFetch={handleFetch} />
                             </div>
 
 
                         </div>
                         <div className="buttonscontainer">
-                            <div className="start"></div>
+                            <div onClick={HandleClick} className="start"></div>
                             <div className="select"></div>
                         </div>
                     </div>

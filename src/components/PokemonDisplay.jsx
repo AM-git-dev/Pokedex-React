@@ -1,6 +1,6 @@
 function PokemonDisplay({ pokemonData }) {
     return (
-        <div>
+        <div className="container-top">
             <div className="nameandimage">
                 <h1>{pokemonData.id < 100 ? `0${pokemonData.id}` : pokemonData.id} - {pokemonData.name}</h1>
                 <img

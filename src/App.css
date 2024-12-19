@@ -44,12 +44,20 @@ body {
 .upscreen {
     background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 90%;
     height: 90%;
     border: black 0.0625rem solid;
     border-radius: 0.9375rem;
+    transition: 2s;
+
+    .container-top {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
 
     .nameandimage {
         position: relative;
@@ -61,7 +69,7 @@ body {
         align-items: center;
         h1 {
             text-transform: capitalize;
-            color : white;
+            color : black;
             margin: 0;
         }
         img {
@@ -69,19 +77,21 @@ body {
         }
     }
 
-    .infos{
+    .infos {
         width: 50%;
-    .type {
-        border: 1px solid black;
-        width: 50px;
-        text-align: center;
-        text-transform: capitalize;
-        background:linear-gradient(to bottom, #8B0000, #FF6347, #8B0000); ;
-    }
 
-    audio{
-        width: 80%;
+        .type {
+            border: 1px solid black;
+            width: 50px;
+            text-align: center;
+            text-transform: capitalize;
+            background: linear-gradient(to bottom, #8B0000, #FF6347, #8B0000);;
         }
+
+        audio {
+            width: 80%;
+        }
+    }
     }
 }
 
@@ -149,7 +159,7 @@ body {
     width: 2.5rem;
     height: 1.25rem;
     border: black 0.25rem outset;
-    background: black;
+    background: rgb(104, 162, 94);
     margin-bottom: 0.625rem;
     transition-duration: 0.2s;
 }
@@ -160,7 +170,7 @@ body {
     width: 2.5rem;
     height: 1.25rem;
     border: black 0.25rem outset;
-    background: black;
+    background: rgb(104, 162, 94);
     margin-bottom: 0.625rem;
     transition-duration: 0.2s;
 }
@@ -225,13 +235,38 @@ body {
     width: 90%;
     height: 80%;
     margin-bottom: 20px;
-    transition-duration: 2s;
+    transition: 2s;
 
     .listcontainer {
         display: flex;
         align-items: center;
         width: fit-content;
         height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 3s ease, visibility 3s ease;
+
+        div{
+            div{
+                font-size: 20px;
+            }
+        }
+    }
+
+    .listcontainer.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .filters {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 3s ease, visibility 3s ease;
+    }
+
+    .filters.visible {
+        opacity: 1;
+        visibility: visible;
     }
 
 

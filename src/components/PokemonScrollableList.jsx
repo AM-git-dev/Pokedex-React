@@ -133,8 +133,12 @@ function PokemonScrollableList({ onSelect }) {
         <div
             ref={listRef}
             style={{
+                border: 'double 6px black',
+                borderRadius: '5px',
                 height: '85%',
-                overflow: 'hidden',
+                width: '200px',
+                scrollbarWidth: 'thin',
+                overflowY: 'scroll',
                 padding: '5px',
                 cursor: isDragging ? 'grabbing' : 'grab',
                 userSelect: 'none'
