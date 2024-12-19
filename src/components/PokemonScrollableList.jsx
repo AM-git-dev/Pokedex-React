@@ -20,7 +20,6 @@ function PokemonScrollableList({ onSelect }) {
     useEffect(() => {
         const loadPokemons = async () => {
             try {
-                // On récupère les 151 premiers Pokémon
                 const speciesListResponse = await axios.get('https://pokeapi.co/api/v2/pokemon-species?limit=1500&offset=0');
                 const speciesArray = speciesListResponse.data.results;
 
@@ -59,7 +58,7 @@ function PokemonScrollableList({ onSelect }) {
         setLastY(e.clientY);
         setLastTime(performance.now());
 
-        // Si une animation est en cours (momentum), on l'arrête
+
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
             animationFrameRef.current = null;
@@ -72,7 +71,7 @@ function PokemonScrollableList({ onSelect }) {
         const deltaY = e.clientY - startY;
         listRef.current.scrollTop = startScrollTop - deltaY;
 
-        // Calculer la vitesse
+
         const now = performance.now();
         const elapsed = now - lastTime;
         const distance = e.clientY - lastY;
@@ -80,15 +79,14 @@ function PokemonScrollableList({ onSelect }) {
         setLastY(e.clientY);
         setLastTime(now);
 
-        // La vitesse instantanée (px/ms)
+
         velocityRef.current = distance / elapsed;
     };
 
     const handleMouseUp = () => {
         setIsDragging(false);
 
-        // Au MouseUp, on lance l'effet de momentum
-        // On utilise velocityRef.current pour continuer le défilement
+
         startMomentumScroll();
     };
 
@@ -104,15 +102,14 @@ function PokemonScrollableList({ onSelect }) {
         const element = listRef.current;
         let velocity = velocityRef.current;
 
-        const friction = 0.97; // Ajuster pour changer la friction (0.95 = arrêt progressif assez rapide)
-        const minVelocity = 0.01; // Vitesse minimale pour s'arrêter
+        const friction = 0.97;
+        const minVelocity = 0.01;
 
         const step = () => {
-            element.scrollTop -= velocity * 16; // 16ms ~ un frame à 60fps
+            element.scrollTop -= velocity * 16;
             velocity *= friction;
 
-            // On arrête si la vitesse est devenue très faible
-            // ou si on atteint le haut/bas de la liste
+
             if (Math.abs(velocity) < minVelocity ||
                 element.scrollTop === 0 ||
                 element.scrollTop === (element.scrollHeight - element.clientHeight)) {
@@ -133,6 +130,7 @@ function PokemonScrollableList({ onSelect }) {
         <div
             ref={listRef}
             style={{
+                fontFamily: 'Pokemon',
                 border: 'double 6px black',
                 borderRadius: '5px',
                 height: '85%',
