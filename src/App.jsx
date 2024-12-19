@@ -8,7 +8,7 @@ import PokemonScrollableList from './components/PokemonScrollableList';
 function App() {
 
     const [light, setLight] = useState('rgb(104, 162, 94)')
-
+    const [pokedexDescription, setPokedexDescription] = useState('')
     const [screenColor, setcreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
 
     const HandleClickStart = (event) => {
@@ -38,7 +38,8 @@ function App() {
             const pokemonDetails = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`);
             const speciesUrl = pokemonDetails.data.species.url;
             const speciesResponse = await axios.get(speciesUrl);
-
+            const pokedexDescriptionData = speciesResponse.data.flavor_text_entries.find(entry => entry.language.name === 'fr');
+            setPokedexDescription(pokedexDescriptionData ? pokedexDescriptionData.flavor_text : 'Description non disponible.');
             const frenchName = speciesResponse.data.names.find(
                 name => name.language.name === 'fr'
             )?.name || pokemonDetails.data.name;
@@ -64,10 +65,14 @@ function App() {
         <div className="pokedexcontainer">
             <div className="upscreencontainer">
                 <div className="upscreenborder">
-                    <div style={{ background: screenColor }} className="upscreen">
+                    <div style={{background: screenColor}} className="upscreen">
                         {error && <div className="error-message">{error}</div>}
-                        {pokemonData && <PokemonDisplay pokemonData={pokemonData} />}
+                        {pokemonData && <PokemonDisplay pokemonData={pokemonData}/>}
+                        <div className="description">
+                            <p>{pokedexDescription}</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
