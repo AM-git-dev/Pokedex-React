@@ -4,14 +4,10 @@ import axios from 'axios';
 function PokemonScrollableList({ onSelect }) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
-
     const listRef = useRef(null);
-
     const [isDragging, setIsDragging] = useState(false);
     const [startY, setStartY] = useState(0);
     const [startScrollTop, setStartScrollTop] = useState(0);
-
-    // Pour le momentum
     const [lastY, setLastY] = useState(0);
     const [lastTime, setLastTime] = useState(0);
     const velocityRef = useRef(0); // vitesse en px/ms

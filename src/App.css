@@ -75,7 +75,6 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         h1 {
             margin-top: 10px;
             font-family: Pokemon;
@@ -507,4 +506,12 @@ body {
 .listItemHover:hover {
     background-color: black;
     color: white;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }

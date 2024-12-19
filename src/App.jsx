@@ -6,22 +6,23 @@ import PokemonDisplay from './components/PokemonDisplay';
 import PokemonScrollableList from './components/PokemonScrollableList';
 
 function App() {
+    const [light, setLight] = useState('rgb(104, 162, 94)');
+    const [pokedexDescription, setPokedexDescription] = useState('');
+    const [screenColor, setScreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000');
+    const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+    const [isContainerTopVisible, setIsContainerTopVisible] = useState(false);
 
-    const [light, setLight] = useState('rgb(104, 162, 94)')
-    const [pokedexDescription, setPokedexDescription] = useState('')
-    const [screenColor, setcreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
-
-    const HandleClickStart = (event) => {
-
-        setcreenColor('white')
-        setLight('rgb(38,255,0)')
+    const HandleClickStart = () => {
+        setScreenColor('white');
+        setLight('rgb(38,255,0)');
     }
 
     const HandleClickdown = (event) => {
 
         setcreenColor('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
         setLight('rgb(104, 162, 94)')
-
+        setIsContainerTopVisible(false);
+        setIsDescriptionVisible(false);
     }
 
     const [pokemonData, setPokemonData] = useState(null);
@@ -51,6 +52,8 @@ function App() {
 
             setPokemonData(pokemonDataWithFrenchName);
             setError(null);
+            setIsDescriptionVisible(true);
+            setIsContainerTopVisible(true);
         } catch (err) {
             setError("Aucun résultat trouvé. Vérifiez l'orthographe ou utilisez le nom anglais.");
             setPokemonData(null);
@@ -67,8 +70,8 @@ function App() {
                 <div className="upscreenborder">
                     <div style={{background: screenColor}} className="upscreen">
                         {error && <div className="error-message">{error}</div>}
-                        {pokemonData && <PokemonDisplay pokemonData={pokemonData}/>}
-                        <div className="description">
+                        {pokemonData && <PokemonDisplay pokemonData={pokemonData} isContainerTopVisible={isContainerTopVisible} />}
+                        <div className={`description ${isDescriptionVisible ? "visible" : "hidden"}`} style={{border: isDescriptionVisible ? '' : 'none'}}>
                             <p>{pokedexDescription}</p>
                         </div>
                     </div>

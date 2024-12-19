@@ -1,7 +1,8 @@
-function PokemonDisplay({ pokemonData }) {
-    return (
+import React from "react";
 
-        <div className="container-top">
+function PokemonDisplay({ pokemonData, isContainerTopVisible }) {
+    return (
+        <div className={`container-top ${isContainerTopVisible ? "visible" : "hidden"}`}>
             <div className="nameandimage">
                 <h1>{pokemonData.id < 100 ? `0${pokemonData.id}` : pokemonData.id} - {pokemonData.name}</h1>
                 <img
@@ -16,9 +17,7 @@ function PokemonDisplay({ pokemonData }) {
                 </p>
                 <audio controls src={pokemonData.cries?.latest} autoPlay={true}></audio>
             </div>
-
         </div>
-
     );
 }
 
