@@ -10,8 +10,10 @@ function PokemonDisplay({ pokemonData }) {
             </div>
             <div className="infos">
                 <p className={`class${pokemonData.types[0].type.name}`}>{pokemonData.types[0].type.name}</p>
-                {/* Enlevez l'audio si vous n'avez pas de source valide */}
-                 <audio controls src={pokemonData.cries?.latest}></audio>
+                <p className={`class${pokemonData.types[1] ? pokemonData.types[1].type.name : ''}`}>
+                    {pokemonData.types[1] ? pokemonData.types[1].type.name : ''}
+                </p>
+                <audio controls src={pokemonData.cries?.latest}></audio>
             </div>
         </div>
     );
