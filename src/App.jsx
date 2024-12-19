@@ -19,7 +19,7 @@ function App() {
 
     const HandleClickdown = (event) => {
 
-        setcreenColor('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
+        setScreenColor('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
         setLight('rgb(104, 162, 94)')
         setIsContainerTopVisible(false);
         setIsDescriptionVisible(false);
