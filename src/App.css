@@ -85,7 +85,7 @@ body {
             width: 50px;
             text-align: center;
             text-transform: capitalize;
-            background: linear-gradient(to bottom, #8B0000, #FF6347, #8B0000);;
+            background: linear-gradient(to bottom, #8B0000, #FF6347, #8B0000);
         }
 
         audio {
@@ -345,57 +345,90 @@ body {
 /* pokemon class */
 
 .classnormal {
-    background-color: rgb(160, 162, 160);
+    background-color: rgb(204, 209, 204);
 }
 .classfire {
     background-color: rgb(231, 35, 36);
+    border: 1px solid black;
+    width: 50px;
+    text-align: center;
+    text-transform: capitalize;
+    background: linear-gradient(to bottom, #8B0000, #FF6347, #8B0000);
+    color: whitesmoke;
 }
 .classwater {
     background-color: rgb(36, 129, 240);
+    background: linear-gradient(to bottom, #2481F0FF, #99b9e8, #2481F0FF);
 }
 .classelectric {
     background-color: rgb(250, 193, 0);
+    background: linear-gradient(to bottom, #FAC100FF, #e3d1ac, #FAC100FF);
 }
 .classgrass {
     background-color: rgb(61, 162, 36);
+    background: linear-gradient(to bottom, #3DA224FF, #a5dd94, #3DA224FF);
 }
 .classice {
     background-color: rgb(61, 217, 255);
+    background: linear-gradient(to bottom, #3DD9FFFF, #a8dae4, #3DD9FFFF);
 }
 .classfighting {
     background-color: rgb(255, 129, 0);
+    background: linear-gradient(to bottom, #FF8100FF, #edb981, #FF8100FF);
 }
 .classpoison {
     background-color: rgb(146, 63, 204);
+    background: linear-gradient(to bottom, #923FCCFF, #b68dcd, #923FCCFF);
 }
 .classground {
     background-color: rgb(146, 80, 27);
+    background: linear-gradient(to bottom, #92501BFF, #c5b5a5, #92501BFF);
 }
 .classflying {
     background-color: rgb(130, 186, 240);
+    background: linear-gradient(to bottom, #82BAF0FF, #adcfef, #82BAF0FF);
 }
 .classpsychic {
     background-color: rgb(239, 63, 122);
+    background: linear-gradient(to bottom, #EF3F7AFF, #ec8aac, #EF3F7AFF);
 }
 .classbug {
     background-color: rgb(146, 162, 18);
+    background: linear-gradient(to bottom, #92A212FF, #a7aa89, #92A212FF);
 }
 .classrock {
     background-color: rgb(176, 171, 130);
+    background: linear-gradient(to bottom, #B0AB82FF, #d3d1ca, #B0AB82FF);
 }
 .classghost {
     background-color: rgb(113, 63, 113);
+    background: linear-gradient(to bottom, #713F71FF, #807080, #713F71FF);
+    color: whitesmoke;
 }
 .classdragon {
     background-color: rgb(79, 96, 226);
+    background: linear-gradient(to bottom, #4F60E2FF, #9ea7e6, #4F60E2FF);
 }
 .classdark {
     background-color: rgb(79, 63, 61);
+    background: linear-gradient(to bottom, #4F3F3DFF, #8c7b7a, #4F3F3DFF);
+    color: whitesmoke;
 }
 .classsteel {
     background: rgb(96, 162, 185);
+    background: linear-gradient(to bottom, #60A2B9FF, #a3c5cd, #60A2B9FF);
 }
 .classfairy {
     background-color: rgb(239, 113, 240);
+    background: linear-gradient(to bottom, #EF71F0FF, #e1b4e1, #EF71F0FF);
+
 }
 .classstellar {}
+
+.classnormal, .classfire, .classwater, .classelectric, .classgrass, .classice, .classfighting, .classpoison, .classground, .classflying, .classpsychic, .classbug, .classrock, .classghost, .classdragon, .classdark, .classsteel, .classfairy {
+    border: 1px solid black;
+    width: 50px;
+    text-align: center;
+    text-transform: capitalize;
+
+}
