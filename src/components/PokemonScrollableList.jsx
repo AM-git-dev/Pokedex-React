@@ -1,50 +1,99 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 
 function PokemonScrollableList({ onSelect }) {
     const [pokemonList, setPokemonList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [offset, setOffset] = useState(0);
+    const LIMIT = 20; // Number of Pokémon to fetch per batch
     const listRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startY, setStartY] = useState(0);
     const [startScrollTop, setStartScrollTop] = useState(0);
     const [lastY, setLastY] = useState(0);
     const [lastTime, setLastTime] = useState(0);
-    const velocityRef = useRef(0); // vitesse en px/ms
+    const velocityRef = useRef(0); // Vitesse en px/ms
     const animationFrameRef = useRef(null);
 
+    const loadPokemons = useCallback(async () => {
+        if (loading || !hasMore) return;
+        setLoading(true);
+        try {
+            const speciesListResponse = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon-species?limit=${LIMIT}&offset=${offset}`
+            );
+            const speciesArray = speciesListResponse.data.results;
+
+            // If no more species are returned, set hasMore to false
+            if (speciesArray.length === 0) {
+                setHasMore(false);
+                setLoading(false);
+                return;
+            }
+
+            const allPromises = speciesArray.map(async (speciesItem) => {
+                const speciesData = await axios.get(speciesItem.url);
+                const frenchName =
+                    speciesData.data.names.find((n) => n.language.name === 'fr')?.name ||
+                    speciesData.data.name;
+                return {
+                    id: speciesData.data.id,
+                    nameEn: speciesData.data.name,
+                    nameFr: frenchName,
+                };
+            });
+
+            const fullList = await Promise.all(allPromises);
+            setPokemonList((prevList) => {
+                // Create a Set of existing IDs to prevent duplicates
+                const existingIds = new Set(prevList.map(p => p.id));
+                const newPokemons = fullList.filter(p => !existingIds.has(p.id));
+                return [...prevList, ...newPokemons.sort((a, b) => a.id - b.id)];
+            });
+            setOffset((prevOffset) => prevOffset + LIMIT);
+            setLoading(false);
+        } catch (error) {
+            console.error("Erreur lors du chargement des noms de Pokémon.", error);
+            setLoading(false);
+        }
+    }, [loading, hasMore, offset]);
+
+
     useEffect(() => {
-        const loadPokemons = async () => {
-            try {
-                const speciesListResponse = await axios.get('https://pokeapi.co/api/v2/pokemon-species?limit=1500&offset=0');
-                const speciesArray = speciesListResponse.data.results;
+        loadPokemons();
+    }, [loadPokemons]);
 
-                const allPromises = speciesArray.map(async (speciesItem) => {
-                    const speciesData = await axios.get(speciesItem.url);
-                    const frenchName = speciesData.data.names.find(n => n.language.name === 'fr')?.name || speciesData.data.name;
-                    return {
-                        id: speciesData.data.id,
-                        nameEn: speciesData.data.name,
-                        nameFr: frenchName
-                    };
-                });
 
-                const fullList = await Promise.all(allPromises);
-                setPokemonList(fullList.sort((a, b) => a.id - b.id));
-                setLoading(false);
-            } catch (error) {
-                console.error("Erreur lors du chargement des noms de Pokémon.", error);
-                setLoading(false);
+    const handleScroll = useCallback(() => {
+        if (!listRef.current || loading || !hasMore) return;
+
+        const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+        if (scrollHeight - scrollTop - clientHeight < 100) {
+            loadPokemons();
+        }
+    }, [loading, hasMore, loadPokemons]);
+
+    // Attach the scroll event listener once
+    useEffect(() => {
+        const currentRef = listRef.current;
+        if (currentRef) {
+            currentRef.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (currentRef) {
+                currentRef.removeEventListener('scroll', handleScroll);
             }
         };
+    }, [handleScroll]);
 
-        loadPokemons();
-    }, []);
-
+    // Handle clicking on a Pokémon
     const handleClick = (pokemon) => {
         onSelect(pokemon.nameEn);
     };
 
+    // Drag-to-scroll handlers
     const handleMouseDown = (e) => {
         if (!listRef.current) return;
         setIsDragging(true);
@@ -53,7 +102,6 @@ function PokemonScrollableList({ onSelect }) {
 
         setLastY(e.clientY);
         setLastTime(performance.now());
-
 
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
@@ -67,7 +115,6 @@ function PokemonScrollableList({ onSelect }) {
         const deltaY = e.clientY - startY;
         listRef.current.scrollTop = startScrollTop - deltaY;
 
-
         const now = performance.now();
         const elapsed = now - lastTime;
         const distance = e.clientY - lastY;
@@ -75,14 +122,11 @@ function PokemonScrollableList({ onSelect }) {
         setLastY(e.clientY);
         setLastTime(now);
 
-
         velocityRef.current = distance / elapsed;
     };
 
     const handleMouseUp = () => {
         setIsDragging(false);
-
-
         startMomentumScroll();
     };
 
@@ -105,10 +149,11 @@ function PokemonScrollableList({ onSelect }) {
             element.scrollTop -= velocity * 16;
             velocity *= friction;
 
-
-            if (Math.abs(velocity) < minVelocity ||
+            if (
+                Math.abs(velocity) < minVelocity ||
                 element.scrollTop === 0 ||
-                element.scrollTop === (element.scrollHeight - element.clientHeight)) {
+                element.scrollTop === element.scrollHeight - element.clientHeight
+            ) {
                 return;
             }
 
@@ -118,10 +163,6 @@ function PokemonScrollableList({ onSelect }) {
         animationFrameRef.current = requestAnimationFrame(step);
     };
 
-    if (loading) {
-        return <div>Chargement...</div>;
-    }
-
     return (
         <div
             className="hoverElement"
@@ -130,10 +171,10 @@ function PokemonScrollableList({ onSelect }) {
                 fontFamily: 'Pokemon',
                 border: 'double 6px black',
                 borderRadius: '5px',
-                height: '85%',
+                height: '66%',
                 width: '200px',
                 scrollbarWidth: 'thin',
-                overflowY: 'scroll',
+                overflowY: 'auto',
                 padding: '5px',
                 cursor: isDragging ? 'grabbing' : 'grab',
                 userSelect: 'none',
@@ -143,17 +184,18 @@ function PokemonScrollableList({ onSelect }) {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
         >
-            {pokemonList.map(p => (
+            {pokemonList.map((p) => (
                 <div
                     className="listItemHover"
                     key={p.id}
                     style={{ cursor: 'pointer', marginBottom: '5px' }}
                     onClick={() => handleClick(p)}
-
                 >
                     {String(p.id).padStart(3, '0')} - {p.nameFr}
                 </div>
             ))}
+            {loading && <div>Chargement...</div>}
+            {!hasMore && <div>Fin de la liste.</div>}
         </div>
     );
 }

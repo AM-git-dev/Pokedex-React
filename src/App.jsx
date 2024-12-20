@@ -1,26 +1,31 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import PokemonFetcher from './components/PokemonFetcher';
 import PokemonDisplay from './components/PokemonDisplay';
 import PokemonScrollableList from './components/PokemonScrollableList';
+import typeBackgrounds from './utils/typeBackgrounds';
 
 function App() {
     const [light, setLight] = useState('rgb(104, 162, 94)');
     const [pokedexDescription, setPokedexDescription] = useState('');
+    const [upscreenBackgroundImage, setUpscreenBackgroundImage] = useState('');
+    const [screenBackgroundImage, setScreenBackgroundImage] = useState('');
     const [screenColor, setScreenColor] = useState('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000');
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
     const [isContainerTopVisible, setIsContainerTopVisible] = useState(false);
 
     const HandleClickStart = () => {
         setScreenColor('white');
+        setScreenBackgroundImage('url(src/img/ecran_bas.jpeg)');
         setLight('rgb(38,255,0)');
     }
 
-    const HandleClickdown = (event) => {
-
-        setScreenColor('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000')
-        setLight('rgb(104, 162, 94)')
+    const HandleClickdown = () => {
+        setScreenColor('linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3)), #000000');
+        setScreenBackgroundImage('');
+        setUpscreenBackgroundImage('');
+        setLight('rgb(104, 162, 94)');
         setIsContainerTopVisible(false);
         setIsDescriptionVisible(false);
     }
@@ -32,6 +37,7 @@ function App() {
         if (!pokemonName) {
             setError("Veuillez entrer un nom.");
             setPokemonData(null);
+            setUpscreenBackgroundImage('');
             return;
         }
 
@@ -54,9 +60,13 @@ function App() {
             setError(null);
             setIsDescriptionVisible(true);
             setIsContainerTopVisible(true);
+            const primaryType = pokemonDetails.data.types[0].type.name;
+            const backgroundImage = typeBackgrounds[primaryType] || typeBackgrounds['default'];
+            setUpscreenBackgroundImage(backgroundImage);
         } catch (err) {
             setError("Aucun résultat trouvé. Vérifiez l'orthographe ou utilisez le nom anglais.");
             setPokemonData(null);
+            setUpscreenBackgroundImage('');
         }
     };
 
@@ -68,14 +78,23 @@ function App() {
         <div className="pokedexcontainer">
             <div className="upscreencontainer">
                 <div className="upscreenborder">
-                    <div style={{background: screenColor}} className="upscreen">
+                    <div
+                        style={{
+                            background: upscreenBackgroundImage
+                                ? `url(${upscreenBackgroundImage}), ${screenColor}`
+                                : screenColor,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                        }}
+                        className="upscreen"
+                    >
                         {error && <div className="error-message">{error}</div>}
                         {pokemonData && <PokemonDisplay pokemonData={pokemonData} isContainerTopVisible={isContainerTopVisible} />}
-                        <div className={`description ${isDescriptionVisible ? "visible" : "hidden"}`} style={{border: isDescriptionVisible ? '' : 'none'}}>
+                        <div className={`description ${isDescriptionVisible ? "visible" : "hidden"}`} style={{ border: isDescriptionVisible ? '' : 'none' }}>
                             <p>{pokedexDescription}</p>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -87,8 +106,8 @@ function App() {
 
             <div className="containerbottompart">
                 <div className="left">
-                    <div className="lightup" style={{background: light}}></div>
-                    <div className="lightdown" style={{background: light}}></div>
+                    <div className="lightup" style={{ background: light }}></div>
+                    <div className="lightdown" style={{ background: light }}></div>
                     <div className="bluecircle">
                         <div className="reflect"></div>
                     </div>
@@ -96,16 +115,20 @@ function App() {
 
                 <div className="bottomscreencontainer">
                     <div className="screenborder">
-                        <div className="screen" style={{ background: screenColor }}>
-                            <div className={`listcontainer ${screenColor === "white" ? "visible" : ""}`}>
+                        <div className="screen" style={{
+                            background: screenBackgroundImage || screenColor,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                        }}>
+
+                            <div className={`listcontainer ${screenBackgroundImage ? "visible" : ""}`}>
                                 <PokemonScrollableList onSelect={handleSelectFromList} />
                             </div>
 
-                            <div className={`filters ${screenColor === "white" ? "visible" : ""}`}>
+                            <div className={`filters ${screenBackgroundImage ? "visible" : ""}`}>
                                 <PokemonFetcher onFetch={handleFetch} />
                             </div>
-
-
                         </div>
                         <div className="buttonscontainer">
                             <div onClick={HandleClickStart} className="start"></div>

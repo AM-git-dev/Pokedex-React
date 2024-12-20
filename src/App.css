@@ -80,7 +80,7 @@ body {
             font-family: Pokemon;
             text-transform: capitalize;
             color : black;
-            font-size: 15px;
+            font-size: 13px;
         }
         img {
             position: relative;
@@ -305,9 +305,12 @@ body {
     margin-bottom: 20px;
     transition: 2s;
 
+
     .listcontainer {
+        position: relative;
+        top: 10px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         width: fit-content;
         height: 100%;
         opacity: 0;
@@ -316,7 +319,7 @@ body {
 
         div{
             div{
-                font-size: 10px;
+                font-size: 9px;
             }
         }
     }
@@ -330,6 +333,7 @@ body {
         opacity: 0;
         visibility: hidden;
         transition: opacity 3s ease, visibility 3s ease;
+        height: 96%;
     }
 
     .filters.visible {
@@ -337,6 +341,19 @@ body {
         visibility: visible;
     }
 
+    input {
+        background: #70b370;
+        height: 25px;
+        width: 250px;
+        text-align: center;
+        font-family: Pokemon;
+
+    }
+    ::placeholder {
+        color: black;
+        font-family: Pokemon;
+        font-size: 10px;
+    }
 
 }
 
@@ -515,3 +532,4 @@ body {
 .visible {
     visibility: visible;
 }
+
