@@ -4,7 +4,7 @@
 }
 @font-face {
     font-family: Pokemon;
-    src: url("C:\Users\HugoG\Projects\Becode-project-pokedex\src\fonts\PokemonGb-RAeo.ttf");
+    src: url("E:\Dev\Becode-project-pokedex\src\fonts\PokemonGb-RAeo.ttf");
 }
 
 body {
@@ -88,7 +88,6 @@ body {
             width : 200px;
             border-radius: 5px;
             border: black double 6px;
-
         }
     }
 

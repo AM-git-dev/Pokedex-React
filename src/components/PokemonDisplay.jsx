@@ -6,6 +6,7 @@ function PokemonDisplay({ pokemonData, isContainerTopVisible }) {
             <div className="nameandimage">
                 <h1>{pokemonData.id < 100 ? `0${pokemonData.id}` : pokemonData.id} - {pokemonData.name}</h1>
                 <img
+                    className={`class${pokemonData.types[0].type.name}`}
                     src={pokemonData.sprites.front_default}
                     alt={pokemonData.name}
                 />
