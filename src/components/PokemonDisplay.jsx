@@ -16,7 +16,7 @@ function PokemonDisplay({ pokemonData, isContainerTopVisible }) {
                 <p id='type2' className={`class${pokemonData.types[1] ? pokemonData.types[1].type.name : ''}`}>
                     {pokemonData.types[1] ? pokemonData.types[1].type.name : ''}
                 </p>
-                <audio controls src={pokemonData.cries?.latest} autoPlay={true}></audio>
+                <audio controls src={pokemonData.cries?.latest} autoPlay={true} volume="0.5"></audio>
             </div>
         </div>
     );

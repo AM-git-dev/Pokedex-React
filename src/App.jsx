@@ -37,7 +37,7 @@ function App() {
         setIsContainerTopVisible(false);
         setIsDescriptionVisible(false);
 
-        playAudio.pause();
+        playAudio.paused();
 
     }
 

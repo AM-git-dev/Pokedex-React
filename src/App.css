@@ -166,7 +166,7 @@ body {
 
 
 .separatordark2 {
-    margin-left: 300px;
+    margin-left: 258px;
     background: linear-gradient(to bottom, #59130e, #FF6347, #59130e);
     width: 95px;
     height: 6.125rem;
@@ -176,7 +176,7 @@ body {
 }
 
 .separatordark3 {
-    margin-left: 400px;
+    margin-left: 442px;
     background: linear-gradient(to bottom, #59130e, #FF6347, #59130e);
     width: 95px;
     height: 6.125rem;
@@ -269,6 +269,7 @@ body {
 }
 
 .bottomscreencontainer {
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -350,7 +351,7 @@ body {
 
 .start{
     position: relative;
-    top: 9.5px;
+    top: 10.5px;
     width: 85px;
     height: 15px;
     background-color: #d1d1d1;
@@ -366,7 +367,7 @@ body {
 
 .select{
     position: relative;
-    top: 9.5px;
+    top: 10.5px;
     width: 85px;
     height: 15px;
     background-color: #d1d1d1;
@@ -376,6 +377,7 @@ body {
 }
 
 .rightborder {
+    z-index: 2;
     display: flex;
     align-items: center;
     background: linear-gradient(to bottom, #8B0000, #FF6347, #8B0000);
@@ -386,7 +388,7 @@ body {
     width: 16.25rem;
     height: 18.75rem;
     border: black 0.0625rem solid;
-    box-shadow: black 0.25rem 0.25rem 0.25rem 0;
+    box-shadow: black -0.25rem 0.25rem 0.20rem 0;
 }
 
 .rightborderinside {
