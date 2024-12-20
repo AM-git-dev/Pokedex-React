@@ -198,6 +198,7 @@ body {
     border: black 0.0625rem solid;
     border-bottom-left-radius: 6.25rem;
     box-shadow: black 0.25rem 0.25rem 0.25rem 0;
+    border-top-left-radius: 0.625rem;
 }
 
 .lightup {
@@ -278,6 +279,7 @@ body {
     width: 48.4375rem;
     height: 36.125rem;
     box-shadow: black 0.25rem 0.25rem 0.25rem 0;
+    border-top-right-radius: 0.625rem;
 }
 
 .screenborder {
@@ -388,7 +390,9 @@ body {
     width: 16.25rem;
     height: 18.75rem;
     border: black 0.0625rem solid;
-    box-shadow: black -0.25rem 0.25rem 0.20rem 0;
+    box-shadow: black 0.25rem 0.25rem 0.25rem 0;
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
 }
 
 .rightborderinside {
@@ -409,6 +413,12 @@ body {
     color: rgb(216, 216, 216);
     border-style: none;
     background-color: rgba(6,0,221,0);
+    filter: drop-shadow(0 0 0.3rem black);
+}
+
+.plus:active {
+    filter: drop-shadow(0 0 0.20rem black);
+    transform: translateY(0.01rem);
 }
 
 /* pokemon class */

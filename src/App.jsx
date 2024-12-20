@@ -36,9 +36,6 @@ function App() {
         setLight('rgb(104, 162, 94)')
         setIsContainerTopVisible(false);
         setIsDescriptionVisible(false);
-
-        playAudio.paused();
-
     }
 
     const [pokemonData, setPokemonData] = useState(null);
