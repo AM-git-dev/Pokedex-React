@@ -6,6 +6,9 @@ import PokemonDisplay from './components/PokemonDisplay';
 import PokemonScrollableList from './components/PokemonScrollableList';
 import typeBackgrounds from './utils/typeBackgrounds';
 
+import soundFile from './song/gameboy_song.mp3'
+
+
 function App() {
     const [light, setLight] = useState('rgb(104, 162, 94)');
     const [pokedexDescription, setPokedexDescription] = useState('');
@@ -15,10 +18,20 @@ function App() {
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
     const [isContainerTopVisible, setIsContainerTopVisible] = useState(false);
 
+    /* audio */
+
+    const playAudio = new Audio(soundFile);
+
     const HandleClickStart = () => {
+
         setScreenColor('white');
         setScreenBackgroundImage('url(src/img/ecran_bas.jpeg)');
         setLight('rgb(38,255,0)');
+
+        playAudio.volume = 0.1;
+        playAudio.disableRemotePlayback = false;
+        playAudio.play();
+
     }
 
     const HandleClickdown = () => {
@@ -28,6 +41,9 @@ function App() {
         setLight('rgb(104, 162, 94)');
         setIsContainerTopVisible(false);
         setIsDescriptionVisible(false);
+
+        playAudio.paused();
+
     }
 
     const [pokemonData, setPokemonData] = useState(null);
