@@ -1,6 +1,9 @@
+
 import React from "react";
 
 function PokemonDisplay({ pokemonData, isContainerTopVisible }) {
+    const primaryType = pokemonData.types[0].type.name;
+
     return (
         <div className={`container-top ${isContainerTopVisible ? "visible" : "hidden"}`}>
             <div className="nameandimage">
