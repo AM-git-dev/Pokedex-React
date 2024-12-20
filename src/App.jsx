@@ -5,9 +5,9 @@ import PokemonFetcher from './components/PokemonFetcher';
 import PokemonDisplay from './components/PokemonDisplay';
 import PokemonScrollableList from './components/PokemonScrollableList';
 import typeBackgrounds from './utils/typeBackgrounds';
+import ecranBas from './img/ecran_bas.jpeg';
 
-import soundFile from './song/gameboy_song.mp3'
-
+import soundFile from './song/gameboy_song.mp3';
 
 function App() {
     const [light, setLight] = useState('rgb(104, 162, 94)');
@@ -23,15 +23,13 @@ function App() {
     const playAudio = new Audio(soundFile);
 
     const HandleClickStart = () => {
-
         setScreenColor('white');
-        setScreenBackgroundImage('url(src/img/ecran_bas.jpeg)');
+        setScreenBackgroundImage(`url(${ecranBas})`);
         setLight('rgb(38,255,0)');
 
         playAudio.volume = 0.1;
         playAudio.disableRemotePlayback = false;
         playAudio.play();
-
     }
 
     const HandleClickdown = () => {
@@ -121,11 +119,11 @@ function App() {
                 <div className="left">
                     <div className="ledcontainer">
                         <div className="lightupcontainer">
-                    <div className="lightup" style={{ background: light }}></div>
+                            <div className="lightup" style={{ background: light }}></div>
                             <p>Power</p>
                         </div>
                         <div className="lightdowncontainer">
-                    <div className="lightdown" style={{ background: light }}></div>
+                            <div className="lightdown" style={{ background: light }}></div>
                             <p>Wifi</p>
                         </div>
                     </div>
