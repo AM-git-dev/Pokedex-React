@@ -122,8 +122,16 @@ function App() {
 
             <div className="containerbottompart">
                 <div className="left">
+                    <div className="ledcontainer">
+                        <div className="lightupcontainer">
                     <div className="lightup" style={{ background: light }}></div>
+                            <p>Power</p>
+                        </div>
+                        <div className="lightdowncontainer">
                     <div className="lightdown" style={{ background: light }}></div>
+                            <p>Wifi</p>
+                        </div>
+                    </div>
                     <div className="bluecircle">
                         <div className="reflect"></div>
                     </div>

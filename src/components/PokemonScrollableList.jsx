@@ -5,8 +5,7 @@ function PokemonScrollableList({ onSelect }) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const [offset, setOffset] = useState(0);
-    const LIMIT = 20; // Number of Pokémon to fetch per batch
+    const [nextUrl, setNextUrl] = useState('https://pokeapi.co/api/v2/pokemon-species?limit=20&offset=0');
     const listRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startY, setStartY] = useState(0);
@@ -17,15 +16,13 @@ function PokemonScrollableList({ onSelect }) {
     const animationFrameRef = useRef(null);
 
     const loadPokemons = useCallback(async () => {
-        if (loading || !hasMore) return;
+        if (loading || !hasMore || !nextUrl) return;
         setLoading(true);
         try {
-            const speciesListResponse = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon-species?limit=${LIMIT}&offset=${offset}`
-            );
+            const speciesListResponse = await axios.get(nextUrl);
             const speciesArray = speciesListResponse.data.results;
 
-            // If no more species are returned, set hasMore to false
+            // Si aucun species n'est retourné, arrêter le chargement
             if (speciesArray.length === 0) {
                 setHasMore(false);
                 setLoading(false);
@@ -46,24 +43,23 @@ function PokemonScrollableList({ onSelect }) {
 
             const fullList = await Promise.all(allPromises);
             setPokemonList((prevList) => {
-                // Create a Set of existing IDs to prevent duplicates
+                // Créer un Set des IDs existants pour éviter les doublons
                 const existingIds = new Set(prevList.map(p => p.id));
                 const newPokemons = fullList.filter(p => !existingIds.has(p.id));
                 return [...prevList, ...newPokemons.sort((a, b) => a.id - b.id)];
             });
-            setOffset((prevOffset) => prevOffset + LIMIT);
+
+            setNextUrl(speciesListResponse.data.next);
             setLoading(false);
         } catch (error) {
             console.error("Erreur lors du chargement des noms de Pokémon.", error);
             setLoading(false);
         }
-    }, [loading, hasMore, offset]);
-
+    }, [loading, hasMore, nextUrl]);
 
     useEffect(() => {
         loadPokemons();
     }, [loadPokemons]);
-
 
     const handleScroll = useCallback(() => {
         if (!listRef.current || loading || !hasMore) return;
@@ -74,7 +70,7 @@ function PokemonScrollableList({ onSelect }) {
         }
     }, [loading, hasMore, loadPokemons]);
 
-    // Attach the scroll event listener once
+
     useEffect(() => {
         const currentRef = listRef.current;
         if (currentRef) {
@@ -88,12 +84,12 @@ function PokemonScrollableList({ onSelect }) {
         };
     }, [handleScroll]);
 
-    // Handle clicking on a Pokémon
+
     const handleClick = (pokemon) => {
         onSelect(pokemon.nameEn);
     };
 
-    // Drag-to-scroll handlers
+
     const handleMouseDown = (e) => {
         if (!listRef.current) return;
         setIsDragging(true);
