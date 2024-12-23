@@ -9,6 +9,10 @@ Un projet de Pokédex interactif basé sur le design du Pokedex de la 3ème gén
 - Liste déroulante pour parcourir les Pokémons.
 - Interface inspirée du Pokédex de la série tv Pokémon.
 
+## Si vous êtes juste curieux vous pouvez l'essayer directement à ce lien : 
+
+pokedex-henna-omega.vercel.app
+
 ## Prérequis
 
 Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre système :
